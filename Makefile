@@ -3,7 +3,8 @@ cafeteria.c \
 director-of-photography-1.c \
 director-of-photography-2.c \
 stack-stabilization-1.c \
-stack-stabilization-2.c
+stack-stabilization-2.c \
+uniform-integers.c
 
 PRGS= $(SRCS:.c=)
 
