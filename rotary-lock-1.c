@@ -29,13 +29,14 @@
 
 
 #define MIN(x,y)    ( (x) < (y) ? (x) : (y) )
+#define ABS(x)      ( (x) >= 0 ? (x) : -(x) )
 
 
 long long getMinCodeEntryTime(int N, int M, int *C) {
     long long result = 0;
 
     for (int pos = 1; M--; pos = *C++)
-        result += MIN((N + *C - pos) % N, (N - *C + pos) % N);
+        result += MIN(ABS(*C-pos), N - ABS(*C-pos));
 
     return result;
 }
