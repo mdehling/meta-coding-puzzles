@@ -30,15 +30,16 @@
 #include <stdlib.h>
 
 
+#define MAX_DISHES      1000000
+
+
 int getMaximumEatenDishCount(int N, int *D, int K) {
+    int *H = calloc(MAX_DISHES, sizeof *H);
     int result = 0;
 
-    // H[K] is the history ring buffer
-    for (int H[K], i; N--; D++) {
-        for (i = 0; i < result && i < K && H[i] != *D; i++);
-        if (i == result || i == K)
-            H[result++ % K] = *D;
-    };
+    for (; N--; D++)
+        if (H[*D] == 0 || result - H[*D] >= K)
+            H[*D] = ++result;
 
     return result;
 }
