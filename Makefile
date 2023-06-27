@@ -2,6 +2,7 @@ SRCS= \
 cafeteria.c \
 director-of-photography-1.c \
 director-of-photography-2.c \
+hops.c \
 kaitenzushi.c \
 rotary-lock-1.c \
 rotary-lock-2.c \
