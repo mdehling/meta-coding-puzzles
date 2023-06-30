@@ -101,7 +101,7 @@ void map_costs(map_info_t *mi, int row, int col, unsigned cost, int portals_used
         for (int i = 0; i < mi->portals; i++) {
             if (mi->portal_chr[i] == mi->map[row][col]) {
                 map_costs(mi, mi->portal_row[i], mi->portal_col[i], cost, \
-                    portals_used & PORTAL_BIT(mi->map[row][col]));
+                    portals_used | PORTAL_BIT(mi->map[row][col]));
             };
         };
     };
