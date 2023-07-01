@@ -11,6 +11,7 @@ scoreboard-inference-1.c \
 scoreboard-inference-2.c \
 stack-stabilization-1.c \
 stack-stabilization-2.c \
+tunnel-time.c \
 uniform-integers.c
 
 PRGS= $(SRCS:.c=)
