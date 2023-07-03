@@ -34,44 +34,50 @@
 #include <stdlib.h>
 
 
-void deep_dive(int N, int *L, int i0, int *d) {
-    int s[N];
-    int si = 0;
-
-    int *visited = calloc(N, sizeof *visited);
-    for (int i = i0; visited[i] == 0; i = L[i]-1) {
-        visited[i] = si+1;
-        s[si++] = i;
-    };
-
-    int loop_length = visited[s[si-1]] - visited[L[s[si-1]]-1] + 1;
-
-    for (int i = 0; i < si-loop_length; i++)
-        d[s[i]] = si - i;
-
-    for (int i = si-loop_length; i < si; i++)
-        d[s[i]] = loop_length;
-
-    free(visited);
-}
-
-
 int getMaxVisitableWebpages(int N, int *L) {
-    int *d = calloc(N, sizeof *d);
+    int *v = calloc(N, sizeof *v);  // keep track of pages visited
+    int *d = calloc(N, sizeof *d);  // record link depth from each page
+    int D = 0;                      // max depth
+    int s[N], si;                   // stack to keep track of link path
+    int j, n;
 
     for (int i = 0; i < N; i++) {
-        if (d[i] == 0)
-            deep_dive(N, L, i, d);
+        if (d[i] != 0)
+            continue;
+
+        // starting on page i, follow links and create a stack of unseen pages
+        si = 0;
+        for (j = i; v[j] == 0; j = L[j]-1)
+            s[si] = j, si++, v[j] = si;
+        // page j is the first page we had already visited
+
+        if (d[j] != 0) {
+            // been here on a previous path
+            n = d[j];
+        } else {
+            // loop back to an earlier point of this path
+            n = si - v[j] + 1;
+
+            // every page of a loop of length n has max link depth n
+            for (j = si-n; j < si; j++)
+                d[s[j]] = n;
+            // forget loop part
+            si -= n;
+        };
+
+        // link depth decreases along the path
+        for (j = 0; j < si; j++)
+            d[s[j]] = si-j + n;
+
+        // record new max depth
+        if (d[i] > D)
+            D = d[i];
     };
 
-    int max_d = 0;
-    for (int i = 0; i < N; i++)
-        if (d[i] > max_d)
-            max_d = d[i];
-
     free(d);
+    free(v);
 
-    return max_d;
+    return D;
 }
 
 
