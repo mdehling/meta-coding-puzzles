@@ -1,4 +1,5 @@
 SRCS= \
+boss-fight.c \
 cafeteria.c \
 director-of-photography-1.c \
 director-of-photography-2.c \
