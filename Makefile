@@ -11,6 +11,7 @@ rotary-lock-1.c \
 rotary-lock-2.c \
 scoreboard-inference-1.c \
 scoreboard-inference-2.c \
+slippery-trip.c \
 stack-stabilization-1.c \
 stack-stabilization-2.c \
 tunnel-time.c \
