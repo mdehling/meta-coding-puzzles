@@ -24,7 +24,7 @@ PRGS= $(SRCS:.c=)
 all: $(PRGS)
 
 .c:
-	gcc $< -o $@
+	gcc -g $< -o $@
 
 clean:
 	rm -f $(PRGS)
